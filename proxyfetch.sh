@@ -1,10 +1,7 @@
 #!/bin/bash
 
-default_f="/home/fabis/Desktop/teste/pokemons.txt"
-
-
 url=""
-file="$default_f"
+file="/etc/proxychains4.conf"
 socks=""
 count=""
 proxys=(
@@ -65,10 +62,10 @@ function format_socks {
 function go {
 	clear
 	wget -q -O deletme $url
-	cat deletme | grep -o '<td>[^<]*</td>' | sed 's/<[^>]*>//g' | grep -v '[[:alpha:]]' | paste -d ' ' - - | grep '\.' | awk '{if (length($1) >= 1 && length($1) <= 6) print $2, $1; else print $1, $2}' | grep -E '^(\S+\s+\S+)$' | head -n "$count" | sed "s/^/$socks/" | sed 's/:/ /g' | awk '{for (i=1; i<=2; i++) printf("%s%s", $i, (i==2) ? RS : OFS)}'>> $file
+	cat deletme | grep -o '<td>[^<]*</td>' | sed 's/<[^>]*>//g' | grep -v '[[:alpha:]]' | paste -d ' ' - - | grep '\.' | awk '{if (length($1) >= 1 && length($1) <= 6) print $2, $1; else print $1, $2}' | grep -E '^(\S+\s+\S+)$' | head -n "$count" | sed 's/:/ /g' | awk '{for (i=1; i<=2; i++) printf("%s%s", $i, (i==2) ? RS : OFS)}' | sed "s/^/$socks/">> $file
 	
 	
-	resultado=$(cat deletme | grep -o '<td>[^<]*</td>' | sed 's/<[^>]*>//g' | grep -v '[[:alpha:]]' | paste -d ' ' - - | grep '\.' | awk '{if (length($1) >= 1 && length($1) <= 6) print $2, $1; else print $1, $2}' | grep -E '^(\S+\s+\S+)$' | head -n "$count" | sed "s/^/$socks/" | sed 's/:/ /g' | awk '{for (i=1; i<=2; i++) printf("%s%s", $i, (i==2) ? RS : OFS)}')
+	resultado=$(cat deletme | grep -o '<td>[^<]*</td>' | sed 's/<[^>]*>//g' | grep -v '[[:alpha:]]' | paste -d ' ' - - | grep '\.' | awk '{if (length($1) >= 1 && length($1) <= 6) print $2, $1; else print $1, $2}' | grep -E '^(\S+\s+\S+)$' | head -n "$count" | sed 's/:/ /g' | awk '{for (i=1; i<=2; i++) printf("%s%s", $i, (i==2) ? RS : OFS)}' | sed "s/^/$socks/")
 
 	if [ -z "$resultado" ]; then
 		echo -ne "\033[0;31mAttention: No output value\033[0m\n"
@@ -145,5 +142,3 @@ if [ -z "$url" ] || [ -z "$count" ] ; then
 fi
 
 go
-
-
