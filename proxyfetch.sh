@@ -25,7 +25,7 @@ function show_help {
 	echo -ne "-u [URL/NUMBER]\t\tSet the URL that contains a proxy table (Required), see the list for more\n"
 	echo -ne "-c [COUNT]\t\tSet the number of proxies to add (Required)\n"
 	echo -ne "-f [FILE]\t\tSet the file to save the proxies (optional), Default=/etc/proxychains4.conf\n"
-	echo -ne "-s [Y|N]\t\tDefine whether to keep the 'SOCKS5' prefix in the file (optional)\n"
+	echo -ne "-s [TypeSocks]\t\tDefines which socks it is, if it is socks4, socks5, any default=socks5 (optional)\n"
 	echo -ne "-h, --help\t\tDisplay this help message\n"
 	echo -ne "-hl, --help-list\tDisplay a list of available proxy URLs and exit\n"
 	exit 1
