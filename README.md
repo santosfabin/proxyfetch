@@ -1,4 +1,5 @@
 # Tool to get proxys
+- This program was made to take the ip and port of a website, and save to a proxy.
 
 # **Installing**
 
